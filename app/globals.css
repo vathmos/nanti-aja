@@ -1,26 +1,262 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --paper: #ffffff;
+  --ink: #111111;
+  --ink-soft: #3a3a3a;
+  --primary: #2596be;
+  --primary-dark: #1d7a9b;
+  --primary-soft: #8ccfe4;
+  --grid: #d8d8d8;
+  --border-heavy: 4px solid #000000;
+  --radius-tight: 4px;
+  --offset-shadow: 6px 6px 0 #000000;
+  --font-main: var(--font-space-grotesk);
+  --font-mono: var(--font-ibm-plex-mono);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-main), sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.neo-panel {
+  border: var(--border-heavy);
+  border-radius: var(--radius-tight);
+  background: #fff;
+  box-shadow: var(--offset-shadow);
+}
+
+.neo-label {
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+
+.neo-value {
+  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+  font-weight: 800;
+  line-height: 1.05;
+}
+
+.neo-input {
+  width: 100%;
+  border: 3px solid #000;
+  border-radius: 2px;
+  padding: 0.7rem 0.85rem;
+  font-family: var(--font-main), sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: #fff;
+}
+
+.neo-input:focus {
+  outline: none;
+  box-shadow: 4px 4px 0 var(--primary);
+}
+
+.neo-button {
+  border: 3px solid #000;
+  border-radius: 2px;
+  background: var(--primary);
+  color: #fff;
+  padding: 0.6rem 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 #000;
+}
+
+.neo-button:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0 #000;
+  background: var(--primary-dark);
+}
+
+.neo-button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #000;
+}
+
+.neo-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.neo-button-ghost {
+  background: #fff;
+  color: #000;
+}
+
+.neo-button-ghost:hover {
+  background: #f0f0f0;
+}
+
+.neo-button-danger {
+  background: #d42b2b;
+}
+
+.neo-button-danger:hover {
+  background: #b61f1f;
+}
+
+.neo-status {
+  border: 3px solid #000;
+  border-radius: 2px;
+  padding: 0.6rem 0.75rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  background: #f5fbfd;
+}
+
+.glitch-hover:hover {
+  transform: translate(-2px, -2px);
+}
+
+.neo-shift-once {
+  animation: row-shift 120ms steps(1, end);
+}
+
+@keyframes row-shift {
+  0% {
+    transform: translate(2px, 2px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.neo-table-wrap {
+  overflow-x: auto;
+}
+
+.neo-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.neo-table th {
+  text-align: left;
+  border-bottom: 3px solid #000;
+  padding: 0.55rem 0.45rem;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.neo-table td {
+  border-bottom: 2px solid var(--grid);
+  padding: 0.6rem 0.45rem;
+  font-weight: 600;
+}
+
+.neo-divider-row td {
+  padding: 0.45rem;
+  border-bottom: 2px solid #000;
+  background: #eef8fc;
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+.neo-row-closed td {
+  background: #f0f0f0;
+  color: #666;
+}
+
+.neo-closed-title {
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+}
+
+.neo-wrap-text {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  max-width: 460px;
+}
+
+.neo-meter-track {
+  border: 3px solid #000;
+  height: 26px;
+  background: #fff;
+}
+
+.neo-meter-fill {
+  height: 100%;
+  background: var(--primary);
+  transition: width 90ms steps(2, end);
+}
+
+.mono-text {
+  font-family: var(--font-mono), monospace;
+}
+
+.chart-frame {
+  border: 3px solid #000;
+  padding: 0.55rem;
+  background: #fff;
+}
+
+.heatmap-notes {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.neo-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 100;
+}
+
+.neo-modal-card {
+  width: min(640px, 100%);
+  border: 4px solid #000;
+  background: #fff;
+  box-shadow: 8px 8px 0 #000;
+  padding: 1rem;
+}
+
+.reason-chip-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.reason-chip {
+  border: 3px solid #000;
+  border-radius: 2px;
+  background: #fff;
+  padding: 0.4rem 0.6rem;
+  font-weight: 700;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.reason-chip:hover {
+  transform: translate(-1px, -1px);
+}
+
+.reason-chip-active {
+  background: var(--primary);
+  color: #fff;
 }
